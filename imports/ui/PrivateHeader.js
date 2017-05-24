@@ -8,14 +8,14 @@ const PrivateHeader = (props) => {
       <div className="top-bar">
         <div className="top-bar__content">
           <h1 className="top-bar__title">{props.title}</h1>
-          <button className="button button--link-text" onClick={() => {
-            Accounts.logout();
-          }}>Logout</button>
+          <button className="button button--link-text" onClick={() => props.handleLogout()}>Logout</button>
         </div>
       </div>
     )
 }
 PrivateHeader.propTypes = {
-  title: React.PropTypes.string.isRequired
+  title: React.PropTypes.string.isRequired,
+  handleLogout: React.PropTypes.func.isRequired
 }
 export default PrivateHeader;
+  //Accounts.logout();
