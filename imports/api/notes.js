@@ -5,43 +5,46 @@ import SimpleSchema from 'simpl-schema';
 
 export const Notes = new Mongo.Collection('notes');
 
-if (Meteor.isServer) { // publication that send the authenticated user his notes
-  Meteor.publish('notes', function (){
-    return Notes.find({userId: this.userId})
+if (Meteor.isServer) {
+  Meteor.publish('notes', function () {
+    return Notes.find({ userId: this.userId });
   });
 }
 
 Meteor.methods({
-  'notes.insert'(){
+  'notes.insert'() {
     if (!this.userId) {
-      throw new Meteor.Error('User not authorized');
+      throw new Meteor.Error('not-authorized');
     }
-  return Notes.insert({
-    title: '',
-    body: '',
-    userId: this.userId,
-    updatedAt: moment().valueOf()
-  });
-},
-  'notes.remove'(_id){
-    if(!this.userId){
-        throw new Meteor.error('User not authorized')
+
+    return Notes.insert({
+      title: '',
+      body: '',
+      userId: this.userId,
+      updatedAt: moment().valueOf()
+    });
+  },
+  'notes.remove'(_id) {
+    if (!this.userId) {
+      throw new Meteor.Error('not-authorized');
     }
+
     new SimpleSchema({
       _id: {
         type: String,
         min: 1
       }
-    }).validate({ _id })
+    }).validate({ _id });
 
-    Notes.remove({_id, userId: this.userId});
+    Notes.remove({ _id, userId: this.userId });
   },
   'notes.update'(_id, updates) {
-    if(!this.userId){
-        throw new Meteor.error('User not authorized')
+    if (!this.userId) {
+      throw new Meteor.Error('not-authorized');
     }
+
     new SimpleSchema({
-      _id:{
+      _id: {
         type: String,
         min: 1
       },
@@ -54,19 +57,18 @@ Meteor.methods({
         optional: true
       }
     }).validate({
-       _id,
-       ...updates
-     });
+      _id,
+      ...updates
+    });
 
-     Notes.update({
-       _id,
-       userId: this.userId //this validate that the user that created the note is the only one who can update it
-     }, {
-       $set: {
-         updatedAt: moment().valueOf(),
-         ...updates
-       }
-     })
-
+    Notes.update({
+      _id,
+      userId: this.userId
+    }, {
+      $set: {
+        updatedAt: moment().valueOf(),
+        ...updates
+      }
+    });
   }
 });

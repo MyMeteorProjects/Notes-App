@@ -8,37 +8,33 @@ import NotFound from '../ui/NotFound';
 import Login from '../ui/Login';
 
 const unauthenticatedPages = ['/', '/signup'];
-const authenticatedPages = ['/Dashboard', ]
-const onEnterPublicPage = () => { // this function prevents authenticated user from reaching the public pages
-  if(Meteor.userId()) { // it is called inside the JSX on the 'onEnter' att
-    browserHistory.replace('/Dashboard')
+const authenticatedPages = ['/dashboard'];
+const onEnterPublicPage = () => {
+  if (Meteor.userId()) {
+    browserHistory.replace('/dashboard');
   }
-}
-const onEnterPrivatePages = () =>{ //this also prevents unauthenticated users from reaching private pages
-  if(!Meteor.userId()) { // it is called inside the JSX on the 'onEnter' att
-    browserHistory.replace('/')
+};
+const onEnterPrivatePage = () => {
+  if (!Meteor.userId()) {
+    browserHistory.replace('/');
   }
-}
-
+};
 export const onAuthChange = (isAuthenticated) => {
-  const pathname = browserHistory.getCurrentLocation().pathname;// this gets the page that the usin is in right now
-  const isUnauthenticatedPage = unauthenticatedPages.includes(pathname); //this checks if a page is for authenticated users or not
-  const isAuthenticatedPage = authenticatedPages.includes(pathname);//this checks if a page is for authenticated users or not
+  const pathname = browserHistory.getCurrentLocation().pathname;
+  const isUnauthenticatedPage = unauthenticatedPages.includes(pathname);
+  const isAuthenticatedPage = authenticatedPages.includes(pathname);
 
-  if(isUnauthenticatedPage && isAuthenticated ){
-    browserHistory.replace('/Dashboard')//pushes authenticated user to his links page
-  } else if (isAuthenticatedPage && !isAuthenticated){
-    browserHistory.replace('/')//pushes a logged out user or not authenticated user back to the login page (root)
+  if (isUnauthenticatedPage && isAuthenticated) {
+    browserHistory.replace('/dashboard');
+  } else if (isAuthenticatedPage && !isAuthenticated) {
+    browserHistory.replace('/');
   }
-
-  console.log('isAuthenticated', isAuthenticated);
-}
-
+};
 export const routes = (
   <Router history={browserHistory}>
     <Route path="/" component={Login} onEnter={onEnterPublicPage}/>
     <Route path="/signup" component={Signup} onEnter={onEnterPublicPage}/>
-    <Route path="/Dashboard" component={Dashboard} onEnter={onEnterPrivatePages}/>
-    <Route path="*" component={NotFound} onEnter={onEnterPrivatePages}/>
+    <Route path="/dashboard" component={Dashboard} onEnter={onEnterPrivatePage}/>
+    <Route path="*" component={NotFound}/>
   </Router>
 );

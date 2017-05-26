@@ -1,37 +1,38 @@
-//colors
-$brand-promary: #5b4681;
+// Colors
+$brand-primary: #5b4681;
 $grey: #dddddd;
 $light-grey: #f9f9f9;
+$dark-grey: #777777;
 
-//spacing
- $space: 1.4rem;
- $site-max-width: 50rem;
+// Spacing
+$space: 1.4rem;
+$site-max-width: 50rem;
 
-//font sizes
-$base-font-size: 1.6rem;
+// Font sizes
+$base-font-size: 1.4rem;
 $large-font-size: 1.8rem;
 
-// form inputs
+// Form inputs
 $input-border: $grey;
 $input-spacing: 1rem;
 
-// boxed-view
+// Boxed view
 $boxed-view-overlay-bg: $grey;
 $boxed-view-bg: white;
 
-//button
-$btn-bg: $brand-promary ;
-$btn-color: white;
-$btn-pill-color: $brand-promary;
-$btn-secondary-bg: $light-grey;
-$btn-secondary-color: #777777;
-$btn-secondary-border-color: #dddddd;
+// Button
+$button-bg: $brand-primary;
+$button-color: white;
+$button-pill-color: $brand-primary;
+$button-secondary-bg: $light-grey;
+$button-secondary-color: $dark-grey;
+$button-secondary-border-color: $grey;
 
-//top bar
-$top-bar-bg: $brand-promary;
-$top-bar-color: white;
+// Header
+$header-bg: $brand-primary;
+$header-color: white;
 
-//item
+// item
 $item-bg: $light-grey;
 $item-border: darken($item-bg, 8%);
-$item-text-color: #777777;
+$item-text-color: $dark-grey;
