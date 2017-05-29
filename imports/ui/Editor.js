@@ -2,19 +2,18 @@ import React from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Session } from 'meteor/session';
 import { Meteor } from 'meteor/meteor';
-import { browserHistory } from 'react-router'
+import { browserHistory } from 'react-router';
 
 import { Notes } from '../api/notes';
 
 export class Editor extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       title: '',
       body: ''
     };
   }
-
   handleBodyChange(e) {
     const body = e.target.value;
     this.setState({ body });
@@ -25,31 +24,28 @@ export class Editor extends React.Component {
     this.setState({ title });
     this.props.call('notes.update', this.props.note._id, { title });
   }
-
-  removeNote() {
-    this.props.call('notes.remove', this.props.note._id)
+  handleRemoval(){
+    this.props.call('notes.remove', this.props.note._id);
     this.props.browserHistory.push('/dashboard');
   }
-
-  componentDidUpdate (prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     const currentNoteId = this.props.note ? this.props.note._id : undefined;
-    const prevNoteId = prevProps.note? prevProps.note._id : undefined;
+    const prevNoteId = prevProps.note ? prevProps.note._id : undefined;
 
-    if (currentNoteId && currentNoteId !== prevNoteId){
+    if (currentNoteId && currentNoteId !== prevNoteId) {
       this.setState({
         title: this.props.note.title,
         body: this.props.note.body
-      })
+      });
     }
   }
-
   render() {
     if (this.props.note) {
       return (
         <div>
-          <input value={this.state.title} placeholder="Note Title" onChange={this.handleTitleChange.bind(this)}/>
-          <textarea value={this.state.body} placeholder="Write your note" onChange={this.handleBodyChange.bind(this)}></textarea>
-          <button onClick={this.removeNote.bind(this)}>Delete Note</button>
+          <input value={this.state.title} placeholder="Untitled Note" onChange={this.handleTitleChange.bind(this)}/>
+          <textarea value={this.state.body} placeholder="Your note here" onChange={this.handleBodyChange.bind(this)}></textarea>
+          <button onClick={this.handleRemoval.bind(this)}>Delete Note</button>
         </div>
       );
     } else {
