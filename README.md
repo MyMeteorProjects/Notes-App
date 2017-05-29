@@ -14,11 +14,11 @@ User based app that let the users create personal notes, save edit and delete th
 
 </ul>
 
-[Live Demo] (https://jude2go-notes.herokuapp.com/)
+[Live Demo](https://jude2go-notes.herokuapp.com/)
 
 
 ## Getting Started:
-First you need to download and install [Meteor] (https://www.meteor.com/) on your machine.
+First you need to download and install [Meteor](https://www.meteor.com/) on your machine.
 
 Then clone the repo and run the following:
 
