@@ -2,14 +2,21 @@
   * command: heroku create projectName (something not generic)
 
 2. setup a buildpack
-  command: heroku buildpacks:set https://github.com/AdmitHub/meteor-buildpack-horse
+  command: heroku buildpacks:set https://github.com/AdmitHub/meteor-buildpack-horse.git
 
 3. setup mongolab db
   command: heroku addons:create mongolab:sandbox
 
 4.config ROOT_URL env variable
-  command: 
+  command: heroku config:set ROOT_URL="https://jude2go-notes.herokuapp.com"
+  important!! make sure no '/' after url like this: ("jude2go-notes.herokuapp.com/")
+  important!! make sure that the https:// is there
 
 5. set node version in package.json
+  inside package.json add right after dependencies and before dev-dependencies:
+  "engines": {
+    "node": "4.6.2" and specify the correct node version
+    }
 
 6. commit and deploy via git push
+  command: git push heroku master
