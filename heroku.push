@@ -1,0 +1,15 @@
+1. create new heroku app
+  * command: heroku create projectName (something not generic)
+
+2. setup a buildpack
+  command: heroku buildpacks:set https://github.com/AdmitHub/meteor-buildpack-horse
+
+3. setup mongolab db
+  command: heroku addons:create mongolab:sandbox
+
+4.config ROOT_URL env variable
+  command: 
+
+5. set node version in package.json
+
+6. commit and deploy via git push
